@@ -10,14 +10,14 @@ def setup_login_routes(app):
     @login_blueprint.route('/login', methods=['POST'])
     def login():
         data = request.json
-        email = data.get('email')
+        username = data.get('email')
         password = data.get('password')
 
         try:
             app.config['MONGO_URI'] = 'mongodb+srv://pierre:ztxiGZypi6BGDMSY@atlascluster.sbpp5xm.mongodb.net/Bizeterie?retryWrites=true&w=majority'
             mongo = PyMongo(app)
 
-            user = mongo.db.users.find_one({"email": email})
+            user = mongo.db.users.find_one({"username": username})
             if not user:
                 return jsonify({"message": "Paire login/mot de passe incorrecte"}), 401
 

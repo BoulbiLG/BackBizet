@@ -18,7 +18,23 @@ app.after_request(after_request)
 app.debug = False
 CORS(app, resources={r"*": {"origins": "*"}})
 
+
+
+# user
+#from routes.compte.getUser import setup_user_routes
+from routes.compte.login import setup_login_routes
+from routes.compte.signup import setup_signup_route
+
+
+
 #===========================================INITIALISATION DU SERVEUR TERMINE===============================================#
+
+
+
+# user
+#app.register_blueprint(setup_user_routes(app))
+app.register_blueprint(setup_signup_route(app))
+app.register_blueprint(setup_login_routes(app))
 
 
 

@@ -20,21 +20,57 @@ CORS(app, resources={r"*": {"origins": "*"}})
 
 
 
-# user
+# compte
 #from routes.compte.getUser import setup_user_routes
 from routes.compte.login import setup_login_routes
 from routes.compte.signup import setup_signup_route
 
-
-
-#===========================================INITIALISATION DU SERVEUR TERMINE===============================================#
-
-
+# contact
+from routes.contact.mailEnvoie import mailEnvoie
 
 # user
+from routes.user.like import like
+from routes.user.envoieCommentaire import envoieCommentaire
+from routes.user.recuperationCommentaire import recuperationCommentaire
+
+# a la une Recherche
+from routes.alaUne.recuperationMusiqueAlaUne import recuperationMusiqueAlaUne
+from routes.alaUne.recuperationMusiqueLien import recuperationMusiqueLien
+from routes.alaUne.recuperationMusiqueInfo import recuperationMusiqueInfo
+
+# musique recherche
+from routes.recherche.recuperationMusiqueAlaUne import recuperationMusiqueRecherche
+from routes.recherche.recuperationMusiqueLien import recuperationMusiqueLienRecherche
+from routes.recherche.recuperationMusiqueInfo import recuperationMusiqueInfoRecherche
+
+
+
+#=========================================== INITIALISATION DU SERVEUR TERMINE ===============================================#
+
+
+
+# compte
 #app.register_blueprint(setup_user_routes(app))
 app.register_blueprint(setup_signup_route(app))
 app.register_blueprint(setup_login_routes(app))
+
+# mailEnvoie
+app.register_blueprint(mailEnvoie)
+
+# compte
+app.register_blueprint(like)
+app.register_blueprint(envoieCommentaire)
+app.register_blueprint(recuperationCommentaire)
+
+# a la une
+app.register_blueprint(recuperationMusiqueAlaUne)
+app.register_blueprint(recuperationMusiqueLien)
+app.register_blueprint(recuperationMusiqueInfo)
+
+# musique recherche
+app.register_blueprint(recuperationMusiqueRecherche)
+app.register_blueprint(recuperationMusiqueLienRecherche)
+app.register_blueprint(recuperationMusiqueInfoRecherche)
 
 
 

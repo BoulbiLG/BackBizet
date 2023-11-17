@@ -19,14 +19,15 @@ app.debug = False
 CORS(app, resources={r"*": {"origins": "*"}})
 
 
-
 # compte
-#from routes.compte.getUser import setup_user_routes
 from routes.compte.login import setup_login_routes
 from routes.compte.signup import setup_signup_route
 
 # contact
 from routes.contact.mailEnvoie import mailEnvoie
+
+# notification
+from routes.notification.notification import notification
 
 # user
 from routes.user.like import like
@@ -44,18 +45,18 @@ from routes.recherche.recuperationMusiqueLien import recuperationMusiqueLienRech
 from routes.recherche.recuperationMusiqueInfo import recuperationMusiqueInfoRecherche
 
 
-
 #=========================================== INITIALISATION DU SERVEUR TERMINE ===============================================#
 
 
-
 # compte
-#app.register_blueprint(setup_user_routes(app))
 app.register_blueprint(setup_signup_route(app))
 app.register_blueprint(setup_login_routes(app))
 
 # mailEnvoie
 app.register_blueprint(mailEnvoie)
+
+# notification
+app.register_blueprint(notification)
 
 # compte
 app.register_blueprint(like)

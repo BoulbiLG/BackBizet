@@ -31,6 +31,7 @@ def recuperationMusiqueAlaUne_def():
     collection = db['musiqueRecherche']
 
     recherche = request.args.get('recherche', None)
+    emotion = request.args.get('emotion', None)
 
     print(recherche)
 
@@ -39,10 +40,14 @@ def recuperationMusiqueAlaUne_def():
             query = {'$and': []}
 
             regex_pattern = f".*{recherche}.*"
-            #query['$and'].append({'$or': [{'titre': {'$regex': regex_pattern}}, {'compositeur': {'$regex': regex_pattern}}]})
             query['$and'].append({'$or': [{'titre': {'$regex': regex_pattern}}]})
 
+            tag_condition = {'tag': emotion}
+            if 'tags' in query:
+                query['$and'].append(tag_condition)
+                
             data = list(collection.find(query))
+
         else:
             data = list(collection.find())
 

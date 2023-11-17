@@ -33,30 +33,26 @@ def recuperationMusiqueAlaUne_def():
     recherche = request.args.get('recherche', None)
     emotion = request.args.get('emotion', None)
 
-    print(recherche)
+    print('recherche : ', recherche)
+    print('emotion : ', emotion)
 
     try:
+
+        query = {}
+
         if recherche is not None and recherche != "":
-            print('recherche')
             query = {'$and': []}
 
             regex_pattern = f".*{recherche}.*"
-            query['$and'].append({'$or': [{'titre': {'$regex': regex_pattern}}]})
-
-            data = list(collection.find(query))
-        else:
-            data = list(collection.find())
+            query['$and'].append({'titre': {'$regex': regex_pattern}})
 
         if emotion is not None and emotion != "Aucune":
-            print('emotion')
-            query = {'$and': []}
+            query = {}
+            query['tag'] = {'$in': [emotion]}
 
-            query['$and'].append({'tag': {'$in': [emotion]}})
-            data = list(collection.find(query))
-
-        if emotion == "Aucune":
-            print("ererer")
-            data = list(collection.find())
+        print('query : ', query)
+            
+        data = list(collection.find(query))
 
         # ==================== RECUPERATION TRADES TERMINEE ==================== # maxProfit
         

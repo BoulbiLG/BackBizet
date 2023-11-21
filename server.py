@@ -27,7 +27,7 @@ from routes.compte.signup import setup_signup_route
 from routes.contact.mailEnvoie import mailEnvoie
 
 # notification
-from routes.notification.notification import notification
+#from routes.notification.notification import notification
 
 # user
 from routes.user.like import like
@@ -56,7 +56,7 @@ app.register_blueprint(setup_login_routes(app))
 app.register_blueprint(mailEnvoie)
 
 # notification
-app.register_blueprint(notification)
+#app.register_blueprint(notification)
 
 # compte
 app.register_blueprint(like)
